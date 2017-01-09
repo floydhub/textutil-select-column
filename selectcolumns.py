@@ -61,7 +61,11 @@ def main():
             if args.hasheader:
                 headers = next(reader, None)
                 if headers:
-                    writer.writerow(headers)
+                    cols = []
+                    for idx, col in enumerate(headers):
+                        if idx in args.cols:
+                            cols.append(col)
+                    writer.writerow(cols)
 
             print("\nProcessing input")
             for row in reader:
